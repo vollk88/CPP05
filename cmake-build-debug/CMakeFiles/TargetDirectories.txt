@@ -1,0 +1,3 @@
+C:/Users/PrimeGames/Desktop/CPP_05/cmake-build-debug/CMakeFiles/CPP_05.dir
+C:/Users/PrimeGames/Desktop/CPP_05/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/PrimeGames/Desktop/CPP_05/cmake-build-debug/CMakeFiles/rebuild_cache.dir
