@@ -6,7 +6,7 @@
 /*   By: hloki <hloki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:43:39 by hloki             #+#    #+#             */
-/*   Updated: 2022/06/08 23:59:09 by hloki            ###   ########.fr       */
+/*   Updated: 2022/06/12 00:25:49 by hloki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 Bureaucrat::Bureaucrat() : _name("Mr. Bur"), _grade(75)
 {
-	std::cout << GRAY_C "Default Constructor called" END_C << std::endl;
+	std::cout << GRAY_C "[Bureaucrat] Default Constructor called" END_C << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &obj)
 {
 	this->_grade = obj._grade;
-	std::cout << "Set Constructor called" << std::endl;
+	std::cout << "[Bureaucrat] Set Constructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(string const name, int grade) : _name(name)
 {
-	std::cout << YELLOW_C "Constructor called" END_C << std::endl;
+	std::cout << YELLOW_C "[Bureaucrat] Constructor called" END_C << std::endl;
 	try
 	{
 		if (grade < MAXGRADE) throw Bureaucrat::GradeTooHighException();
@@ -47,7 +47,7 @@ Bureaucrat::Bureaucrat(string const name, int grade) : _name(name)
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << LRED_C "~ Destructor called"  END_C << std::endl;
+	std::cout << LRED_C "~[Bureaucrat] Destructor called"  END_C << std::endl;
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &obj)
@@ -85,6 +85,16 @@ void Bureaucrat::removeGrade()
 	}
 }
 
+void Bureaucrat::signForm(Form &form)
+{
+	if (this->getGrade() < form.getGradeToSign())
+		cout << this->getName() << " signed " << form.getName() << endl;
+	else
+		cout << ORNGE_C << this->getName() << LRED_C " couldn’t sign "
+		<< form.getName() << " because Bureaucrat is not grow up((" END_C << endl;
+	form.beSigned(*this);
+}
+
 int Bureaucrat::getGrade() const
 {
 	return this->_grade;
@@ -94,14 +104,4 @@ std::ostream & operator<<(std::ostream & out, Bureaucrat src)
 {
 	out << src.getName() << ", bureaucrat grade " << src.getGrade() << ".";
 	return (out);
-}
-
-const char *Bureaucrat::GradeTooLowException::what() const throw()
-{
-	return (RED_C "Grade is too low exception" END_C);
-}
-
-const char *Bureaucrat::GradeTooHighException::what() const throw()
-{
-	return (RED_C "Grade is too high exception" END_C);
 }

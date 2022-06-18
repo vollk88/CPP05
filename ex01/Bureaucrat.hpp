@@ -6,7 +6,7 @@
 /*   By: hloki <hloki@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:43:43 by hloki             #+#    #+#             */
-/*   Updated: 2022/06/08 23:52:12 by hloki            ###   ########.fr       */
+/*   Updated: 2022/06/12 00:12:28 by hloki            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@
 #include <iostream>
 #include <exception>
 #include "Colors.hpp"
+#include "Form.hpp"
 using std::string;
 using std::cout;
 using std::endl;
+
+class Form;
 
 class Bureaucrat
 {
@@ -33,13 +36,16 @@ public:
 	int				getGrade() const;
 	void			addGrade();
 	void			removeGrade();
-	class GradeTooHighException : public std::exception
+	void			signForm(Form &form);
+	struct GradeTooHighException : std::exception
 	{
-		public: virtual const char * what() const throw();
+		virtual const char * what() const throw()
+		{ return (RED_C "[Bureaucrat] EXEPTION: GradeTooHighException" END_C); };
 	};
-	class GradeTooLowException : public std::exception
+	struct GradeTooLowException : public std::exception
 	{
-		public: virtual const char * what() const throw();
+		virtual const char * what() const throw()
+		{ return (RED_C "[Bureaucrat] EXEPTION: GradeTooLowException" END_C); };
 	};
 private:
 	const string	_name;
